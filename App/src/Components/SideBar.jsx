@@ -1,9 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.svg';
 import { motion } from 'framer-motion';
+
+// FullCalendar React and plugins
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import '@fullcalendar/common/main.css';
+
+// Import FullCalendar CSS from core and daygrid packages
+import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
 
 const SideBar = ({ tasks }) => {
