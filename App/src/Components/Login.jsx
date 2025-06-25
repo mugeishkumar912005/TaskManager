@@ -36,42 +36,44 @@ const Login = () => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-white">
       <ToastContainer />
-      
-      {/* Left Side Animation */}
       <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="w-full md:w-1/2 bg-blue-400 text-white flex flex-col items-center justify-center relative p-6"
+        className="w-full md:w-1/2 bg-blue-500 text-white flex flex-col items-center justify-center p-10 space-y-6"
       >
-        <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">
-          <Typewriter
-            words={["Welcome to TaskApp", "Manage Your Tasks Smartly", "Stay Organized Every Day"]}
-            loop={true}
-            cursor
-            cursorStyle="|"
-            typeSpeed={70}
-            deleteSpeed={50}
-            delaySpeed={2000}
-          />
-        </h1>
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-4">
+            <Typewriter
+              words={["Welcome to TaskApp", "Organize. Prioritize. Conquer.", "Your day, your way."]}
+              loop
+              cursor
+              cursorStyle="|"
+              typeSpeed={70}
+              deleteSpeed={50}
+              delaySpeed={2000}
+            />
+          </h1>
+          <p className="text-lg italic text-blue-100 mt-4 max-w-md mx-auto">
+            “The key is not to prioritize what’s on your schedule, but to schedule your priorities.”
+          </p>
+        </div>
         <img
           src={Doodle}
           alt="Login Visual"
-          className="w-60 h-60 mt-4 object-contain hidden md:block"
+          className="w-64 h-64 object-contain hidden md:block mt-6"
         />
       </motion.div>
-
-      <div className="flex flex-1 items-center justify-center bg-white">
+      <div className="flex flex-1 items-center justify-center px-4 py-12 bg-white">
         {!showSignup ? (
           <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="w-[90%] max-w-md p-6 rounded-md shadow-md"
+            className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg border border-gray-100"
           >
-            <h2 className="text-2xl font-bold text-center mb-6 text-blue-400">Login to TaskApp</h2>
-            <form className="space-y-4" onSubmit={handleLogin}>
+            <h2 className="text-2xl font-bold text-center mb-6 text-blue-500">Login to TaskApp</h2>
+            <form className="space-y-5" onSubmit={handleLogin}>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Email</label>
                 <input
@@ -79,6 +81,7 @@ const Login = () => {
                   value={Email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+                  required
                 />
               </div>
               <div>
@@ -88,18 +91,19 @@ const Login = () => {
                   value={Password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400 outline-none"
+                  required
                 />
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-400 text-white py-2 rounded-md hover:bg-blue-700 transition"
+                className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
               >
                 Login
               </button>
             </form>
             <p className="text-sm text-center mt-4 text-gray-600">
               Don’t have an account?{" "}
-              <button onClick={toggleSignup} className="text-blue-400 underline cursor-pointer">
+              <button onClick={toggleSignup} className="text-blue-500 underline cursor-pointer">
                 Sign up
               </button>
             </p>
@@ -109,6 +113,7 @@ const Login = () => {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="w-full"
           >
             <Signup state={toggleSignup} />
           </motion.div>
