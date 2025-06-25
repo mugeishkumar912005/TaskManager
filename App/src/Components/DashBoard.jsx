@@ -60,7 +60,6 @@ const DashBoard = () => {
 
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 to-yellow-50 flex flex-col items-center justify-start py-8 px-2">
-      {/* Back Button */}
       <div className="w-full max-w-6xl flex items-center mb-6">
         <button
           onClick={() => navigate(-1)}
@@ -70,23 +69,16 @@ const DashBoard = () => {
           Back
         </button>
       </div>
-
-      {/* Dashboard Header */}
       <h2 className="text-4xl font-extrabold text-blue-900 mb-10 text-center w-full max-w-6xl flex items-center justify-center gap-2">
         <span role="img" aria-label="chart">📊</span> Task Analytics Dashboard
       </h2>
-
-      {/* Graphs */}
       <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10">
-        {/* Doughnut Chart Card */}
         <div className="bg-white rounded-3xl shadow-2xl p-10 flex flex-col items-center transition-all duration-300 hover:shadow-3xl">
           <h3 className="text-2xl font-bold text-blue-700 mb-6 text-center">Task Status Overview</h3>
           <div className="w-72 h-72 flex items-center justify-center">
             <Doughnut data={doughnutData} />
           </div>
         </div>
-
-        {/* Bar Chart Card */}
         <div className="bg-white rounded-3xl shadow-2xl p-10 flex flex-col items-center transition-all duration-300 hover:shadow-3xl">
           <h3 className="text-2xl font-bold text-blue-700 mb-6 text-center">Tasks by Due Date</h3>
           <div className="w-full h-72 flex items-center justify-center">

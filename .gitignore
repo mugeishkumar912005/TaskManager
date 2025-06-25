@@ -1,0 +1,6 @@
+# Frontend: App
+App/node_modules/
+App/.env
+# Backend: Server
+Server/node_modules/
+Server/.env

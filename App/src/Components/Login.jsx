@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-white">
       <ToastContainer />
-      <div className="w-full md:w-1/2 bg-blue-600 text-white flex flex-col items-center justify-center relative p-6">
+      <div className="w-full md:w-1/2 bg-blue-400 text-white flex flex-col items-center justify-center relative p-6">
         <h1 className="text-2xl md:text-3xl font-bold text-center mb-6">
           <Typewriter
             words={["Welcome to TaskApp", "Manage Your Tasks Smartly", "Stay Organized Every Day"]}
@@ -58,7 +58,7 @@ const Login = () => {
       <div className="flex flex-1 items-center justify-center bg-white">
         {!showSignup ? (
           <div className="w-[90%] max-w-md p-6 rounded-md shadow-md">
-            <h2 className="text-2xl font-bold text-center mb-6 text-blue-700">Login to TaskApp</h2>
+            <h2 className="text-2xl font-bold text-center mb-6 text-blue-400">Login to TaskApp</h2>
             <form className="space-y-4" onSubmit={handleLogin}>
               <div>
                 <label className="block text-sm font-medium text-gray-700">Email</label>
@@ -80,14 +80,14 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition"
+                className="w-full bg-blue-400 text-white py-2 rounded-md hover:bg-blue-700 transition"
               >
                 Login
               </button>
             </form>
             <p className="text-sm text-center mt-4 text-gray-600">
               Don’t have an account?{" "}
-              <button onClick={toggleSignup} className="text-blue-600 underline cursor-pointer">
+              <button onClick={toggleSignup} className="text-blue-400 underline cursor-pointer">
                 Sign up
               </button>
             </p>
