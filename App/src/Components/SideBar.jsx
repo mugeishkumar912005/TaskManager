@@ -3,44 +3,11 @@ import Logo from '../assets/Logo.svg';
 import { motion } from 'framer-motion';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import './CalendarCustom.css'; // custom styles for neat calendar
 import { useState } from 'react';
-import dayjs from 'dayjs';
 
 const SideBar = ({ tasks }) => {
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date());
-
-  const taskMap = tasks.reduce((map, task) => {
-    const taskDate = new Date(task.Date).toISOString().split('T')[0];
-    map[taskDate] = (map[taskDate] || 0) + 1;
-    return map;
-  }, {});
-
-  const tileContent = ({ date, view }) => {
-    if (view === 'month') {
-      const key = date.toISOString().split('T')[0];
-      const count = taskMap[key];
-
-      if (count) {
-        const color =
-          count >= 3 ? 'bg-red-500' :
-          count === 2 ? 'bg-yellow-400' :
-          'bg-green-400';
-
-        return <div className={`w-2 h-2 mt-1 mx-auto rounded-full ${color}`}></div>;
-      }
-    }
-    return null;
-  };
-
-  const tileClassName = ({ date, view }) => {
-    const key = date.toISOString().split('T')[0];
-    if (view === 'month' && taskMap[key]) {
-      return 'has-task'; // hook for styling if needed
-    }
-    return '';
-  };
 
   return (
     <motion.div
@@ -79,12 +46,7 @@ const SideBar = ({ tasks }) => {
         transition={{ delay: 0.3 }}
         className="bg-white p-3 rounded-lg text-black shadow-md"
       >
-        <Calendar
-          onChange={setDate}
-          value={date}
-          tileContent={tileContent}
-          tileClassName={tileClassName}
-        />
+        <Calendar onChange={setDate} value={date} />
       </motion.div>
     </motion.div>
   );
