@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
-import '@fullcalendar/daygrid/main.css'; // ✅ Only this is needed
+import '@fullcalendar/daygrid/index.css'; // ✅ Fixed import
 
 const SideBar = ({ tasks }) => {
   const navigate = useNavigate();
