@@ -2,12 +2,34 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.svg';
 import { motion } from 'framer-motion';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 
 const SideBar = ({ tasks }) => {
   const navigate = useNavigate();
   const [date, setDate] = useState(new Date());
+
+  // Map dates to task count
+  const taskMap = tasks.reduce((map, task) => {
+    const key = new Date(task.Date).toISOString().split('T')[0];
+    map[key] = (map[key] || 0) + 1;
+    return map;
+  }, {});
+
+  // Highlight task days with colored dots
+  const tileContent = ({ date, view }) => {
+    const key = date.toISOString().split('T')[0];
+    const count = taskMap[key];
+
+    if (view === 'month' && count) {
+      const color =
+        count >= 3 ? 'bg-red-500' :
+        count === 2 ? 'bg-yellow-400' :
+        'bg-green-400';
+
+      return <div className={`w-2 h-2 rounded-full mx-auto mt-1 ${color}`}></div>;
+    }
+    return null;
+  };
 
   return (
     <motion.div
@@ -46,7 +68,22 @@ const SideBar = ({ tasks }) => {
         transition={{ delay: 0.3 }}
         className="bg-white p-3 rounded-lg text-black shadow-md"
       >
-        <Calendar onChange={setDate} value={date} />
+        <div
+          className="text-sm font-medium"
+          style={{
+            border: 'none',
+            fontFamily: 'sans-serif',
+          }}
+        >
+          <Calendar
+            onChange={setDate}
+            value={date}
+            tileContent={tileContent}
+            tileClassName={() => 'p-2'}
+            next2Label={null}
+            prev2Label={null}
+          />
+        </div>
       </motion.div>
     </motion.div>
   );
