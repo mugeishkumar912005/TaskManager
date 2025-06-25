@@ -10,6 +10,7 @@ import {
   LinearScale,
 } from "chart.js";
 import { ArrowLeft } from "lucide-react";
+import { motion } from "framer-motion";
 
 ChartJS.register(ArcElement, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
 
@@ -59,7 +60,12 @@ const DashBoard = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-blue-50 to-yellow-50 flex flex-col items-center justify-start py-8 px-2">
+    <motion.div
+      className="min-h-screen w-full bg-gradient-to-br from-blue-50 to-yellow-50 flex flex-col items-center justify-start py-8 px-2"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="w-full max-w-6xl flex items-center mb-6">
         <button
           onClick={() => navigate(-1)}
@@ -69,24 +75,42 @@ const DashBoard = () => {
           Back
         </button>
       </div>
-      <h2 className="text-4xl font-extrabold text-blue-900 mb-10 text-center w-full max-w-6xl flex items-center justify-center gap-2">
+
+      <motion.h2
+        className="text-4xl font-extrabold text-blue-900 mb-10 text-center w-full max-w-6xl flex items-center justify-center gap-2"
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      >
         <span role="img" aria-label="chart">📊</span> Task Analytics Dashboard
-      </h2>
+      </motion.h2>
+
       <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div className="bg-white rounded-3xl shadow-2xl p-10 flex flex-col items-center transition-all duration-300 hover:shadow-3xl">
+        <motion.div
+          className="bg-white rounded-3xl shadow-2xl p-10 flex flex-col items-center transition-all duration-300 hover:shadow-3xl"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+        >
           <h3 className="text-2xl font-bold text-blue-700 mb-6 text-center">Task Status Overview</h3>
           <div className="w-72 h-72 flex items-center justify-center">
             <Doughnut data={doughnutData} />
           </div>
-        </div>
-        <div className="bg-white rounded-3xl shadow-2xl p-10 flex flex-col items-center transition-all duration-300 hover:shadow-3xl">
+        </motion.div>
+
+        <motion.div
+          className="bg-white rounded-3xl shadow-2xl p-10 flex flex-col items-center transition-all duration-300 hover:shadow-3xl"
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
           <h3 className="text-2xl font-bold text-blue-700 mb-6 text-center">Tasks by Due Date</h3>
           <div className="w-full h-72 flex items-center justify-center">
             <Bar data={barData} />
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -194,7 +194,7 @@ const Main = () => {
               return (
                 <div
                   key={i}
-                  className={`bg-white rounded-xl p-3 border-l-4 transition duration-200 flex flex-col justify-between 
+                  className={`bg-white h-50 rounded-xl p-3 border-l-4 transition duration-200 flex flex-col justify-between 
                     ${task.status === "Completed" ? "border-green-500" : isLapsed ? "border-red-500" : "border-yellow-500"}`}
                   onClick={() => setSelectedTask(task)}
                 >
