@@ -1,23 +1,47 @@
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.svg';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import '../../src/index.css'; 
+import 'react-modern-calendar-datepicker/lib/DatePicker.css'; 
+
+import { Calendar } from 'react-modern-calendar-datepicker';
 
 const SideBar = ({ tasks }) => {
   const navigate = useNavigate();
-  const [date, setDate] = useState(new Date());
-  const taskDates = tasks.map(task =>
-    new Date(task.Date).toDateString()
-  );
+  const [selectedDay, setSelectedDay] = useState(null);
 
-  const tileClassName = ({ date, view }) => {
-    if (view === 'month') {
-      return taskDates.includes(date.toDateString()) ? 'highlight-tile' : '';
-    }
-    return '';
+  const taskDays = tasks.map(task => {
+    const d = new Date(task.Date);
+    return { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
+  });
+  const isTaskDate = (date) => {
+    return taskDays.some(
+      (taskDate) =>
+        taskDate.year === date.year &&
+        taskDate.month === date.month &&
+        taskDate.day === date.day
+    );
+  };
+  const renderDay = (day) => {
+    const highlight = isTaskDate(day);
+    return (
+      <div
+        style={{
+          backgroundColor: highlight ? '#2563eb' : 'transparent',
+          color: highlight ? 'white' : 'black',
+          borderRadius: '50%',
+          width: 36,
+          height: 36,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontWeight: highlight ? 'bold' : 'normal',
+          cursor: 'pointer',
+        }}
+      >
+        {day.day}
+      </div>
+    );
   };
 
   return (
@@ -36,7 +60,7 @@ const SideBar = ({ tasks }) => {
         </div>
 
         <nav className="flex flex-col gap-4 text-left text-lg font-medium">
-          <a href="#Task "className="hover:bg-blue-700 py-2 px-4 rounded transition">
+          <a href="#Task" className="hover:bg-blue-700 py-2 px-4 rounded transition">
             📝 Tasks
           </a>
           <button
@@ -45,9 +69,7 @@ const SideBar = ({ tasks }) => {
           >
             📊 Dashboard
           </button>
-          <button
-            className="hover:bg-blue-700 py-2 px-4 rounded transition"
-          >
+          <button className="hover:bg-blue-700 py-2 px-4 rounded transition">
             📅 Calendar
           </button>
         </nav>
@@ -60,10 +82,13 @@ const SideBar = ({ tasks }) => {
         className="bg-white p-3 rounded-lg text-black shadow-md"
       >
         <Calendar
-          onChange={setDate}
-          value={date}
-          className="w-full text-sm rounded"
-          tileClassName={tileClassName}
+          value={selectedDay}
+          onChange={setSelectedDay}
+          renderDay={renderDay}
+          shouldHighlightWeekends
+          calendarClassName="custom-calendar"
+          colorPrimary="#2563eb"
+          colorPrimaryLight="#bfdbfe" 
         />
       </motion.div>
     </motion.div>
