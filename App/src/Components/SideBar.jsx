@@ -2,20 +2,20 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.svg';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import 'react-modern-calendar-datepicker/lib/DatePicker.css'; 
+import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 
-import { Calendar, defaultLocale } from 'react-modern-calendar-datepicker';
+import { Calendar } from 'react-modern-calendar-datepicker';
 
 const SideBar = ({ tasks }) => {
   const navigate = useNavigate();
-
-
   const [selectedDay, setSelectedDay] = useState(null);
 
+  // Convert task dates to calendar format { year, month, day }
   const taskDays = tasks.map(task => {
     const d = new Date(task.Date);
     return { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
   });
+
   const isTaskDate = (date) => {
     return taskDays.some(
       (taskDate) =>
@@ -92,7 +92,6 @@ const SideBar = ({ tasks }) => {
           calendarClassName="custom-calendar"
           colorPrimary="#2563eb"
           colorPrimaryLight="#bfdbfe"
-          locale={defaultLocale}  
         />
       </motion.div>
     </motion.div>
