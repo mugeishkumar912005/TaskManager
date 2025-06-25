@@ -1,6 +1,6 @@
 import Nav from "./Nav";
 import SideBar from "./SideBar";
-import Add from "../assets/add.png";
+import Add from "../assets/Add.png";
 import Doodle from "../assets/doodle.svg";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
