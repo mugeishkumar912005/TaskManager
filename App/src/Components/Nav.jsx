@@ -40,7 +40,7 @@ const Nav = ({ user, onSearch, setTasks }) => {
 
   const fetchSortedTasks = async (type) => {
     try {
-      let url = `http://localhost:5000/api/tasks/${type}`;
+      let url = `https://taskmanager-server-r9mj.onrender.com/api/tasks/${type}`;
       const res = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
       });

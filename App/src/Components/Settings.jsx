@@ -30,7 +30,7 @@ const Settings = () => {
       setLoading(true);
       setMessage("");
       await axios.put(
-        "http://localhost:5000/api/users/update",
+        "https://taskmanager-server-r9mj.onrender.com/api/users/update",
         {
           Name: formData.Name,
           Email: formData.Email,

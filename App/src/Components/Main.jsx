@@ -41,7 +41,7 @@ const Main = () => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/tasks/all", {
+      const res = await axios.get("https://taskmanager-server-r9mj.onrender.com/api/tasks/all", {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = Array.isArray(res.data.data) ? res.data.data : [];
@@ -80,13 +80,13 @@ const Main = () => {
     try {
       if (editTaskId) {
         await axios.put(
-          `http://localhost:5000/api/tasks/update/${editTaskId}`,
+          `https://taskmanager-server-r9mj.onrender.com/api/tasks/update/${editTaskId}`,
           formattedData,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         toast.success("Task Updated Successfully!");
       } else {
-        await axios.post("http://localhost:5000/api/tasks/add", formattedData, {
+        await axios.post("https://taskmanager-server-r9mj.onrender.com/api/tasks/add", formattedData, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Task Added Successfully!");
@@ -102,7 +102,7 @@ const Main = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/delete/${id}`, {
+      await axios.delete(`https://taskmanager-server-r9mj.onrender.com/api/tasks/delete/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchTasks();
@@ -114,7 +114,7 @@ const Main = () => {
   const handleUpdate = async (task) => {
     try {
       await axios.put(
-        `http://localhost:5000/api/tasks/update/${task._id}`,
+        `https://taskmanager-server-r9mj.onrender.com/api/tasks/update/${task._id}`,
         { status: "Completed" },
         { headers: { Authorization: `Bearer ${token}` } }
       );
