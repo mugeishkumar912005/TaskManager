@@ -13,7 +13,7 @@ const Settings = () => {
   const [formData, setFormData] = useState({
     Name: user?.Name || "",
     Email: user?.Email || "",
-    Bio: user?.Bio || "", // Optional: add a short bio
+    Bio: user?.Bio || "", 
   });
 
   const [message, setMessage] = useState("");
@@ -56,7 +56,6 @@ const Settings = () => {
       <Nav />
       <div className="flex flex-1 items-center justify-center py-10">
         <div className="relative bg-white shadow-2xl rounded-3xl px-10 py-12 w-full max-w-lg flex flex-col items-center">
-          {/* Back Button */}
           <button
             className="absolute top-6 left-6 text-gray-500 hover:text-blue-700 transition"
             onClick={() => navigate(-1)}
@@ -64,8 +63,6 @@ const Settings = () => {
           >
             <ArrowLeft size={24} />
           </button>
-
-          {/* Profile Image */}
           <div className="flex flex-col items-center mb-6">
             <img
               src="https://i.pravatar.cc/120"
@@ -75,8 +72,6 @@ const Settings = () => {
             <h2 className="text-2xl font-bold text-blue-900 mt-4">{formData.Name}</h2>
             <p className="text-gray-500 text-sm">{formData.Email}</p>
           </div>
-
-          {/* Optional: Bio */}
           <div className="w-full mb-6 text-center">
             {editing ? (
               <textarea
@@ -93,8 +88,6 @@ const Settings = () => {
               )
             )}
           </div>
-
-          {/* Profile Form */}
           <div className="w-full space-y-4">
             <div>
               <label className="text-sm text-gray-600 font-medium">Name</label>

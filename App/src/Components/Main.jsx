@@ -176,49 +176,60 @@ const Main = () => {
               const isLapsed = dueDate < new Date();
 
               return (
-                <div
-                  key={i}
-                  className={`bg-white h-50 w-full rounded-xl p-3 
-                    ${task.status === "Completed" ? "border-green-500" : isLapsed ? "border-red-500" : "border-yellow-500"} 
-                    border-l-4 transition duration-200 flex flex-col justify-between`}
-                  onClick={() => setSelectedTask(task)}
-                >
-                  <div>
-                    <h3 className="text-sm font-semibold text-gray-800 truncate">{task.Title}</h3>
-                    <div className="text-xs text-gray-400 truncate">{formatDate(task.Date)}</div>
-                  </div>
-                  <div className="flex justify-end gap-2 text-xs font-medium mt-2">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleEdit(task);
-                      }}
-                      className="text-yellow-500 hover:underline"
-                    >
-                      ✎ Edit
-                    </button>
-                    {task.status !== "Completed" && !isLapsed && (
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleUpdate(task);
-                        }}
-                        className="text-blue-600 hover:underline"
-                      >
-                        ✓ Done
-                      </button>
-                    )}
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDelete(task._id);
-                      }}
-                      className="text-red-500 hover:underline"
-                    >
-                      🗑
-                    </button>
-                  </div>
-                </div>
+<div
+  key={i}
+  className={`bg-white rounded-xl p-3 border-l-4 transition duration-200 flex flex-col justify-between 
+    ${task.status === "Completed" ? "border-green-500" : isLapsed ? "border-red-500" : "border-yellow-500"}`}
+  onClick={() => setSelectedTask(task)}
+>
+  <div className="mb-2">
+    <h3 className="text-md font-semibold text-gray-800 truncate">{task.Title}</h3>
+    <p className="text-sm text-gray-600 mt-1 line-clamp-2">{task.Discription}</p>
+    <div className="text-xs text-gray-400 mt-1">{formatDate(task.Date)}</div>
+  </div>
+  <div className="flex justify-between items-center mt-2">
+    <div className="flex flex-wrap gap-1 text-[10px] font-medium">
+      <span className="bg-blue-100 text-blue-600 px-2 py-0.5 rounded">#work</span>
+      <span className="bg-purple-100 text-purple-600 px-2 py-0.5 rounded">#urgent</span>
+    </div>
+    <div className="text-[10px] px-2 py-0.5 rounded bg-yellow-100 text-yellow-700 border border-yellow-300">
+      Priority: High
+    </div>
+  </div>
+
+  <div className="flex justify-end gap-2 text-xs font-medium mt-3">
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        handleEdit(task);
+      }}
+      className="text-yellow-500 hover:underline"
+    >
+      ✎ Edit
+    </button>
+    {task.status !== "Completed" && !isLapsed && (
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          handleUpdate(task);
+        }}
+        className="text-blue-600 hover:underline"
+      >
+        ✓ Done
+      </button>
+    )}
+    <button
+      onClick={(e) => {
+        e.stopPropagation();
+        handleDelete(task._id);
+      }}
+      className="text-red-500 hover:underline"
+    >
+      🗑
+    </button>
+  </div>
+</div>
+
               );
             })
           )}

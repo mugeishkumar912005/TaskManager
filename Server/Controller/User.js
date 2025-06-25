@@ -27,7 +27,7 @@ const sendWelcomeEmail = (email, name) => {
     if (error) console.error('Error sending email:', error);
     else console.log('Email sent: ' + info.response);
   });
-};
+};wha
 const AddUser = async (req, res) => {
   try {
     const { Name, Email, Password, Confirm_Password } = req.body;
