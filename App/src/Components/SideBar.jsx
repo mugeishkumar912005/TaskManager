@@ -1,51 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.svg';
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-
-import { Calendar } from 'react-modern-calendar-datepicker';
 
 const SideBar = ({ tasks }) => {
   const navigate = useNavigate();
-  const [selectedDay, setSelectedDay] = useState(null);
-
-  // Convert task dates to calendar format { year, month, day }
-  const taskDays = tasks.map(task => {
-    const d = new Date(task.Date);
-    return { year: d.getFullYear(), month: d.getMonth() + 1, day: d.getDate() };
-  });
-
-  const isTaskDate = (date) => {
-    return taskDays.some(
-      (taskDate) =>
-        taskDate.year === date.year &&
-        taskDate.month === date.month &&
-        taskDate.day === date.day
-    );
-  };
-
-  const renderDay = (day) => {
-    const highlight = isTaskDate(day);
-    return (
-      <div
-        style={{
-          backgroundColor: highlight ? '#2563eb' : 'transparent',
-          color: highlight ? 'white' : 'black',
-          borderRadius: '50%',
-          width: 36,
-          height: 36,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontWeight: highlight ? 'bold' : 'normal',
-          cursor: 'pointer',
-        }}
-      >
-        {day.day}
-      </div>
-    );
-  };
 
   return (
     <motion.div
@@ -78,21 +36,15 @@ const SideBar = ({ tasks }) => {
         </nav>
       </div>
 
+      {/* Placeholder for calendar */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.3 }}
-        className="bg-white p-3 rounded-lg text-black shadow-md"
+        className="bg-white p-6 rounded-lg text-black shadow-md text-center"
+        style={{ minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
-        <Calendar
-          value={selectedDay}
-          onChange={setSelectedDay}
-          renderDay={renderDay}
-          shouldHighlightWeekends
-          calendarClassName="custom-calendar"
-          colorPrimary="#2563eb"
-          colorPrimaryLight="#bfdbfe"
-        />
+        <p className="text-gray-500 italic">Calendar component removed due to errors.<br />Coming soon!</p>
       </motion.div>
     </motion.div>
   );
