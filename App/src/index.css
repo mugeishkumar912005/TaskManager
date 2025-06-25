@@ -3,4 +3,27 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+}.react-calendar {
+  border: none;
+  font-family: 'Inter', sans-serif;
+  background-color: white;
+  border-radius: 12px;
+}
+
+.react-calendar__tile--now {
+  background: #facc15 !important;
+  color: #000;
+  border-radius: 10px;
+}
+
+.react-calendar__tile--active {
+  background: #3b82f6 !important;
+  color: white !important;
+  border-radius: 10px;
+}
+
+.highlight-tile {
+  background-color: #2563eb !important;
+  color: white !important;
+  border-radius: 10px;
 }
