@@ -4,7 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import './CalendarCustom.css'; 
+import '../../src/index.css'; 
 
 const SideBar = ({ tasks }) => {
   const navigate = useNavigate();
