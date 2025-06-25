@@ -1,0 +1,25 @@
+.react-calendar {
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  border-radius: 12px;
+}
+
+.react-calendar__tile {
+  padding: 10px 6.6667px;
+  border: none;
+  font-weight: 500;
+  background: none;
+}
+
+.react-calendar__tile--now {
+  background: #e0f2fe !important;
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+.react-calendar__tile--active {
+  background-color: #3b82f6 !important;
+  color: white;
+  border-radius: 8px;
+}
