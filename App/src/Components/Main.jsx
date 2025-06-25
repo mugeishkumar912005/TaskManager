@@ -55,16 +55,13 @@ const Main = () => {
   };
 
   const handleSearch = (query) => setSearchTerm(query);
-
   const AddToggle = () => {
     setOpen(!open);
     setEditTaskId(null);
     setFormData({ title: "", description: "", date: "", time: "" });
   };
-
   const toggleSidebar = () => setShowSidebar(!showSidebar);
   const closeModal = () => setSelectedTask(null);
-
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -152,6 +149,19 @@ const Main = () => {
     return "bg-yellow-100 text-yellow-700 border-yellow-400";
   };
 
+  const getPriorityLevel = (task) => {
+    const text = `${task.Title} ${task.Discription}`.toLowerCase();
+
+    const highKeywords = ["education", "study", "work", "exam", "job", "career"];
+    const mediumKeywords = ["shopping", "exercise", "cleaning", "call", "project"];
+    const lowKeywords = ["movie", "movies", "play", "beach", "game", "music"];
+
+    if (highKeywords.some((word) => text.includes(word))) return "high";
+    if (mediumKeywords.some((word) => text.includes(word))) return "medium";
+    if (lowKeywords.some((word) => text.includes(word))) return "low";
+    return "medium";
+  };
+
   return (
     <div className="flex h-screen w-full overflow-hidden relative bg-white font-sans">
       <div className={`fixed top-0 left-0 h-full w-64 bg-blue-900 text-white z-50 transform transition-transform duration-300 ease-in-out ${showSidebar ? "translate-x-0" : "-translate-x-full"} sm:translate-x-0 sm:static sm:block`}>
@@ -174,62 +184,68 @@ const Main = () => {
             filteredTasks.map((task, i) => {
               const dueDate = new Date(task.Date);
               const isLapsed = dueDate < new Date();
+              const priority = getPriorityLevel(task);
+              const priorityStyles = {
+                high: "bg-red-100 text-red-700 border-red-400",
+                medium: "bg-yellow-100 text-yellow-700 border-yellow-300",
+                low: "bg-green-100 text-green-700 border-green-300",
+              };
 
               return (
-<div
-  key={i}
-  className={`bg-white rounded-xl p-3 border-l-4 transition duration-200 flex flex-col justify-between 
-    ${task.status === "Completed" ? "border-green-500" : isLapsed ? "border-red-500" : "border-yellow-500"}`}
-  onClick={() => setSelectedTask(task)}
->
-  <div className="mb-2">
-    <h3 className="text-md font-semibold text-gray-800 truncate">{task.Title}</h3>
-    <p className="text-sm text-gray-600 mt-1 line-clamp-2">{task.Discription}</p>
-    <div className="text-xs text-gray-400 mt-1">{formatDate(task.Date)}</div>
-  </div>
-  <div className="flex justify-between items-center mt-2">
-    <div className="flex flex-wrap gap-1 text-[10px] font-medium">
-      <span className="bg-blue-100 text-blue-600 px-2 py-0.5 rounded">#work</span>
-      <span className="bg-purple-100 text-purple-600 px-2 py-0.5 rounded">#urgent</span>
-    </div>
-    <div className="text-[10px] px-2 py-0.5 rounded bg-yellow-100 text-yellow-700 border border-yellow-300">
-      Priority: High
-    </div>
-  </div>
+                <div
+                  key={i}
+                  className={`bg-white rounded-xl p-3 border-l-4 transition duration-200 flex flex-col justify-between 
+                    ${task.status === "Completed" ? "border-green-500" : isLapsed ? "border-red-500" : "border-yellow-500"}`}
+                  onClick={() => setSelectedTask(task)}
+                >
+                  <div className="mb-2">
+                    <h3 className="text-md font-semibold text-gray-800 truncate">{task.Title}</h3>
+                    <p className="text-sm text-gray-600 mt-1 line-clamp-2">{task.Discription}</p>
+                    <div className="text-xs text-gray-400 mt-1">{formatDate(task.Date)}</div>
+                  </div>
 
-  <div className="flex justify-end gap-2 text-xs font-medium mt-3">
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        handleEdit(task);
-      }}
-      className="text-yellow-500 hover:underline"
-    >
-      ✎ Edit
-    </button>
-    {task.status !== "Completed" && !isLapsed && (
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          handleUpdate(task);
-        }}
-        className="text-blue-600 hover:underline"
-      >
-        ✓ Done
-      </button>
-    )}
-    <button
-      onClick={(e) => {
-        e.stopPropagation();
-        handleDelete(task._id);
-      }}
-      className="text-red-500 hover:underline"
-    >
-      🗑
-    </button>
-  </div>
-</div>
+                  <div className="flex justify-between items-center mt-2">
+                    <div className="flex flex-wrap gap-1 text-[10px] font-medium">
+                      <span className="bg-blue-100 text-blue-600 px-2 py-0.5 rounded">#auto</span>
+                      <span className="bg-purple-100 text-purple-600 px-2 py-0.5 rounded">#{priority}</span>
+                    </div>
+                    <div className={`text-[10px] px-2 py-0.5 rounded border ${priorityStyles[priority]}`}>
+                      Priority: {priority.charAt(0).toUpperCase() + priority.slice(1)}
+                    </div>
+                  </div>
 
+                  <div className="flex justify-end gap-2 text-xs font-medium mt-3">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEdit(task);
+                      }}
+                      className="text-yellow-500 hover:underline"
+                    >
+                      ✎ Edit
+                    </button>
+                    {task.status !== "Completed" && !isLapsed && (
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleUpdate(task);
+                        }}
+                        className="text-blue-600 hover:underline"
+                      >
+                        ✓ Done
+                      </button>
+                    )}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(task._id);
+                      }}
+                      className="text-red-500 hover:underline"
+                    >
+                      🗑
+                    </button>
+                  </div>
+                </div>
               );
             })
           )}
