@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import 'react-modern-calendar-datepicker/lib/DatePicker.css'; 
 
-import { Calendar } from 'react-modern-calendar-datepicker';
+import { Calendar, defaultLocale } from 'react-modern-calendar-datepicker';
 
 const SideBar = ({ tasks }) => {
   const navigate = useNavigate();
+
+
   const [selectedDay, setSelectedDay] = useState(null);
 
   const taskDays = tasks.map(task => {
@@ -22,6 +24,7 @@ const SideBar = ({ tasks }) => {
         taskDate.day === date.day
     );
   };
+
   const renderDay = (day) => {
     const highlight = isTaskDate(day);
     return (
@@ -88,7 +91,8 @@ const SideBar = ({ tasks }) => {
           shouldHighlightWeekends
           calendarClassName="custom-calendar"
           colorPrimary="#2563eb"
-          colorPrimaryLight="#bfdbfe" 
+          colorPrimaryLight="#bfdbfe"
+          locale={defaultLocale}  
         />
       </motion.div>
     </motion.div>
